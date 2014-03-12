@@ -1,49 +1,51 @@
-﻿<script runat="server">
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="CIS311Proj5.Contact" %>
+<%@ Import Namespace="System.Net.Mail" %> 
+ <%@ Import Namespace="System.Web.Configuration" %>
+
+<script runat="server">
     protected void submit(object sender, EventArgs e)
     {
         String output;
+        String name;
         String email;
-        String password;
-        String gender;
-        String profession;
+        String subject;
+        String message;
         if (IsValid(Email.Text) == false)
         {
             outputLabel.Text = "Invalid Email";
             return;
         }
-        if (IsValid(Name.Text) == false)
-        {
-            outputLabel.Text = "Invalid Name"
-        }
-        output = "UserName: " + Email.Text + "<br />"
-            + "UserPass: " + userpass.Text + "<br />"
-            + "Profession: " + drop1.SelectedItem + "<br />";
+        output = "Name: " + Name.Text + "<br />"
+            + "Email: " + Email.Text + "<br />"
+            + "Subject: " + Subject.Text + "<br />"
+            + "Message: " + Message.Text + "<br />";
+        name = Name.Text;
         email = Email.Text;
+        subject = Subject.Text;
+        message = Message.Text;
         outputLabel.Text = output;
-        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["huyString"].ConnectionString;
+        String connString = System.Configuration.ConfigurationManager.ConnectionStrings["paulString"].ConnectionString;
         System.Data.SqlClient.SqlConnection conn = null;
+        StringBuilder errorMessages = new StringBuilder();
         try
         {
             conn = new System.Data.SqlClient.SqlConnection(connString);
             conn.Open();
-
-
             using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand())
             {
                 cmd.Connection = conn;
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = "INSERT INTO [Table] Values (@Email,@Password,@Profession,@Gender)";
+                cmd.CommandText = "INSERT INTO [Table1] Values (@Name,@Email,@Subject,@Message)";
+                cmd.Parameters.AddWithValue("@Name", name);
                 cmd.Parameters.AddWithValue("@Email", email);
-                cmd.Parameters.AddWithValue("@Password", password);
-                cmd.Parameters.AddWithValue("@Profession", profession);
-                cmd.Parameters.AddWithValue("@Gender", gender);
+                cmd.Parameters.AddWithValue("@Subject", subject);
+                cmd.Parameters.AddWithValue("@Message", message);
 
                 int rowAffected = cmd.ExecuteNonQuery();
                 if (rowAffected == 1)
                 {
-                    useremail.Text = "";
-                    userpass.Text = "";
-                    drop1.SelectedIndex = -1;
+                    Name.Text = "";
+                    Email.Text = "";
                     //Alert the user the record got saved
 
                 }
@@ -56,9 +58,17 @@
         catch (System.Data.SqlClient.SqlException sqlException)
         {
             System.Console.Write(sqlException.Message);
-
             //Alert user
-            outputLabel.Text = "";
+            outputLabel.Text = "Exception, not saved!";
+            /*for (int i = 0; i < sqlException.Errors.Count; i++)
+            {
+                errorMessages.Append("Index #" + i + "\n" +
+                    "Message: " + sqlException.Errors[i].Message + "\n" +
+                    "LineNumber: " + sqlException.Errors[i].LineNumber + "\n" +
+                    "Source: " + sqlException.Errors[i].Source + "\n" +
+                    "Procedure: " + sqlException.Errors[i].Procedure + "\n");
+            }
+            Console.WriteLine(errorMessages.ToString());*/
         }
     }
 
@@ -68,7 +78,7 @@
     {
         try
         {
-            MailAddress m = new MailAddress(emailaddress);
+            System.Net.Mail.MailAddress m = new System.Net.Mail.MailAddress(emailaddress);
             return true;
         }
         catch (FormatException)
@@ -81,9 +91,8 @@
     {
 
     }
+    
 </script>
-
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="CIS311Proj5.Contact" %>
 
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" media="all" href="style.css" />
@@ -154,36 +163,32 @@
 
 <!-- Begin Wrapper -->
 <div class="wrapper"><!-- Begin Intro -->
-<div class="intro">Nulla vitae elit libero, a pharetra augue. Vivamus sagittis lacus augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum, Vestibulum id ligula porta. </div>
+<div class="intro">Feel free to leave Paul Wang a message! </div>
 <ul class="social">
-<li><a class="rss" href="#"></a></li><li><a class="facebook" href="#"></a></li><li><a class="twitter" href="#"></a></li><li><a class="pinterest" href="#"></a></li><li><a class="dribbble" href="#"></a></li><li><a class="flickr" href="#"></a></li><li><a class="linkedin" href="#"></a></li></ul><!-- End Intro --> 
+<li><a class="rss" href="#"></a></li><li><a class="facebook" href="https://www.facebook.com/pengren.wang"></a></li><li><a class="twitter" href="https://twitter.com/SomeOne311"></a></li><li><a class="pinterest" href="#"></a></li><li><a class="dribbble" href="#"></a></li><li><a class="flickr" href="#"></a></li><li><a class="linkedin" href="http://www.linkedin.com/pub/paul-wang/4b/b8a/b8a"></a></li></ul><!-- End Intro --> 
 
 <!-- Begin Container -->
 <div class="content box">
 
 	<h1 class="title">Contact</h1>
-		<div class="map"><iframe width="630" height="350" src="http://maps.google.com/maps?ll=40.967132,29.07403&amp;spn=0.047894,0.132093&amp;vpsrc=6&amp;t=m&amp;z=14&amp;output=embed"></iframe></div>
+		<div class="map"><iframe width="630" height="350" src="http://maps.google.com/maps?ll=34.0556603,-117.8207799&amp;spn=0.047894,0.132093&amp;vpsrc=6&amp;t=m&amp;z=14&amp;output=embed"></iframe></div>
 <h3>Email me a Message</h3>
 
 <div class="form-container">
 	<form runat="server" class="forms" action="#" method="post">
 		<fieldset>
 			<ol>
-				<li class="form-row text-input-row"><label>Name</label><asp:TextBox id="Name" runat="server" type="text" name="name" value="" class="text-input required" title="" /></li> 
-				<li class="form-row text-input-row"><label>Email</label><asp:TextBox id="Email" runat="server" type="text" name="email" value="" class="text-input required email" title="" /></li> 
-				<li class="form-row text-input-row"><label>Subject</label><asp:TextBox id="Subject" runat="server" type="text" name="subject" value="" class="text-input required" title="" /></li> 
+				<li class="form-row text-input-row"><label>Name</label><asp:TextBox id="Name" runat="server" type="text" name="name" value="" class="text-input required" /></li> 
+				<li class="form-row text-input-row"><label>Email</label><asp:TextBox id="Email" runat="server" type="text" name="email" value="" class="text-input required email" /></li> 
+				<li class="form-row text-input-row"><label>Subject</label><asp:TextBox id="Subject" runat="server" type="text" name="subject" value="" class="text-input required"/></li> 
 				<li class="form-row text-area-row"><label>Message</label><asp:TextBox id="Message" runat="server" name="message" class="text-area required"></asp:TextBox></li> 
-				<li class="button-row"><input type="submit" value="Submit" name="submit" class="btn-submit" /></li>
+				<li><asp:Button id="submitButton" runat="server" type="submit" name="post-submit" value="Submit" OnClick="submit" class="btn btn-lg btn-primary btn-block" Text ="Submit" /> </li> 
                 
 			</ol>
 		</fieldset>
 	</form>
 </div>
 <div><asp:Label ID="outputLabel" runat="server"></asp:Label></div>
-
-
-
-
 </div>
 <!-- End Container -->
 
@@ -191,18 +196,16 @@
 <div class="sidebar box">
   <div class="sidebox widget">
 			<h3 class="widget-title">Where Are We?</h3>
-			<p>Lorem Ipsum Dolor Sit Moon Avenue No:11/21 Planet City, Earth</p>
-			<p>
-				<span class="lite1">Fax:</span> +555 797 534 01<br />
-				<span class="lite1">Tel:</span> +555 636 646 62<br />
-				<span class="lite1">E-mail:</span> name@domain.com
+			<p>3801 W Temple Ave <br />Pomona, CA 91768</p>
+      		<p>
+				<span class="lite1">Tel:</span> +626 242 3399<br />
+				<span class="lite1">E-mail:</span> paul.wang.is.007@gmail.com
 			</p>
-			
-	</div>
+    </div>
 	
 	<div class="sidebox widget">
-		<h3 class="widget-title">Custom Text</h3>
-		<p>Suspendisse eu odio quis elit ultrice commodo tempor eget arcu. Sedur aliquet posuere lectus aliquam iaculi. Curabitur a risus metus. In ut lorem nisl, et adipiscing sapien. Donec sed risus tristiq scelerisque. </p>
+		<h3 class="widget-title">I will read all your messages</h3>
+		<p>I will reply back to you ASAP! </p>
 	</div>
 	
 </div>
@@ -288,7 +291,7 @@
 			<ul class="flickr-feed"></ul>
 			
 		</div>
-		</div><!-- #fourth .widget-area -->
+		<%--</div><!-- #fourth .widget-area -->--%>
 	</div>
 <div class="site-generator-wrapper">
 	<div class="site-generator">Copyright Obscura 2012. Design by <a href="http://elemisfreebies.com">elemis</a>. All rights reserved.</div>

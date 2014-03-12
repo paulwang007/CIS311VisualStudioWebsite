@@ -10,60 +10,87 @@
 namespace CIS311Proj5 {
     
     
-    public partial class Contact {
+    public partial class WebForm3 {
         
         /// <summary>
-        /// Name control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Name;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Email control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Email;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// Subject control.
+        /// SqlDataSource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Subject;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
         
         /// <summary>
-        /// Message control.
+        /// DropDownList1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Message;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
         
         /// <summary>
-        /// submitButton control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button submitButton;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
-        /// outputLabel control.
+        /// DropDownList2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label outputLabel;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        
+        /// <summary>
+        /// TextBox2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

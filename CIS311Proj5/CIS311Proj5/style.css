@@ -653,7 +653,10 @@ hr {
 .content.box,
 #comment-wrapper.box,
 .sidebar.box {
-    margin: 0
+    margin: 0;
+    top: -9px;
+    left: 0px;
+    height: 488px;
 }
 .blog-grid .post {
     width: 490px
@@ -816,7 +819,7 @@ iframe {
     visibility: hidden;
 }
 .content {
-    width: 670px;
+    width: 926px;
     float: left;
 }
 .sidebar {

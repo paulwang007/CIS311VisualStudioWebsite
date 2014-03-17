@@ -1,7 +1,9 @@
-﻿CREATE TABLE [dbo].[Table1]
-(
-    [Name] NCHAR(50) Primary Key NOT NULL, 
-    [Email] NCHAR(50) NOT NULL, 
-    [Subject] NCHAR(50) NOT NULL, 
-    [Message] NCHAR(100) NOT NULL
-)
+﻿CREATE TABLE [dbo].[Table1] (
+    [Id]      INT         IDENTITY (1, 1) NOT NULL,
+    [Name]    NCHAR (50)  NULL,
+    [Email]   NCHAR (50)  NULL,
+    [Subject] NCHAR (50)  NULL,
+    [Message] NCHAR (100) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+

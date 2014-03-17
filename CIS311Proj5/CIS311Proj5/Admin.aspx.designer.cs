@@ -10,7 +10,7 @@
 namespace CIS311Proj5 {
     
     
-    public partial class WebForm3 {
+    public partial class Contact {
         
         /// <summary>
         /// form1 control.
